@@ -1,30 +1,34 @@
-const form = document.querySelector('#searchform');
-const res = document.querySelector('#tableResult');
+const form = document.querySelector('#searchForm');
+const res = document.querySelector('#resTable');
+const cont=document.getElementById("allContaint");
 var upd;
 
 form.addEventListener('submit',(e)=>{
 
     e.preventDefault();
-    if(upd){
-        clearTimeout(upd);
-    }
-    
-    const ctype = form.elements.coinType.value;
-
+    const ctype=form.elements.coinType.value;
+    cont.classList.add('mainClick');
+    cont.classList.remove('main');
     fetchPrice(ctype);
 
 });
 
 const fetchPrice = async(ctype) =>{
     const r = await axios.get(`https://api.coinstats.app/public/v1/coins/${ctype}?currency=USD`);
-    console.log(r.data.coin.price);
-    const price=r.data.coin.price;
-    const volume=r.data.coin.volume;
-    const change=r.data.coin.pricechange1d;
-    const base=r.data.coin.name;
-    const target='USD';
+    showPrice(r.data.coin);
+}
+const showprice=(coinData)=>{
+    const price=coinData.price;
+    const vol=coinData.volume;
+    const change=coinData.pricechange1d;
+    const coin=coinDataname;
+    const curr='USD';
+    var col="green";
+    if(change<0){
+        col="red";
+    }
    
-    res.innerHTML=`<tr style="background-color:blue; color:white; font-weight:700">
+    res.innerHTML=`<tr class="bg-primary" style="color:white;">
     <td>
         property
     </td>
@@ -32,21 +36,16 @@ const fetchPrice = async(ctype) =>{
 </tr>
 <tr>
     <td>
-        ${base}
-    </td>
-    <td > ${price} ${target}</td>
+        ${coin}
+    </td>${col};"><span style="font-size: 1.3em;">${price}</span> ${curr}</td>
 </tr>
 <tr>
-    <td>
-        Volume
-    </td>
-    <td >${volume}</td>
-    <tr>
-        <td>
-            Change
-        </td>
-        <td >${change}</td>
-        <tr>`
-           
-           upd=setTimeout(()=>fetchPrice(ctype),10000);
-}
+    <td> Volume(24hrs)</td>
+    <td >${vol}</td>
+</tr>
+<tr>
+     <td> Change(24hrs)</td>
+     <td style="color:${col};">${change} ${curr}</td>
+</tr> `;
+};    
+        
