@@ -32,7 +32,7 @@ const fetchPrice = async(ctype) =>{
 </tr>
 <tr>
     <td>
-        ${base
+        ${base}
     </td>
     <td > ${price} ${target}</td>
 </tr>
