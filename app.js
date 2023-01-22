@@ -24,8 +24,9 @@ const showprice=(coinData)=>{
     const coin=coinDataname;
     const curr='USD';
     var col="green";
+    var colo="red";
     if(change<0){
-        col="red";
+        col="green";
     }
    
     res.innerHTML=`<tr class="bg-primary" style="color:white;">
@@ -41,7 +42,7 @@ const showprice=(coinData)=>{
 </tr>
 <tr>
     <td> Volume(24hrs)</td>
-    <td >${vol}</td>
+    <td style="color:${colo};>${vol}</td>
 </tr>
 <tr>
      <td> Change(24hrs)</td>
