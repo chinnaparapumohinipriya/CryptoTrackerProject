@@ -5,7 +5,7 @@ var upd;
 form.addEventListener('submit',(e)=>{
 
     e.preventDefault();
-    if(up){
+    if(upd){
         clearTimeout(upd);
     }
     
