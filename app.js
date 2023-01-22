@@ -13,7 +13,7 @@ form.addEventListener('submit',(e)=>{
 
 const fetchPrice = async(ctype) =>{
     const r = await axios.get(`https://api.coinstats.app/public/v1/coins/${ctype}?currency=USD`);
-    showPrice(r.data.coin);
+    showPrie(r.data.coin);
 }
 
 
